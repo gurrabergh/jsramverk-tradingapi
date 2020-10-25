@@ -50,11 +50,11 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    checkLogin(req, res);
-});
-
-app.get("/login", (req, res) => {
-    checkLogin(req, res);
+    return res.status(201).json({
+        data: {
+            msg: 'success'
+        }
+    });
 });
 
 app.use((err, req, res, next) => {
@@ -236,7 +236,7 @@ setInterval(function () {
 const server = app.listen(port);
 const io = require('socket.io')(server);
 
-io.origins(['https://trading.gustavbergh.me:443']);
+io.origins(['http   ://trading.gustavbergh.me:443']);
 
 io.on('connection', function (socket) {
     socket.on('chat message', function (message) {
