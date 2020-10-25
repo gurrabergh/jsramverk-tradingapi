@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "bash db/reset_test_db.bash",
-    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit",
+    "test": "nyc --reporter=html --reporter=text --reporter=clover mocha test/test.js --exit",
     "start": "nodemon app.js",
     "production": "NODE_ENV='production' node app.js",
     "report-coveralls": "nyc report --reporter=text-lcov | coveralls",
