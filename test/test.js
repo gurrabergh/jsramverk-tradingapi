@@ -13,11 +13,12 @@ describe('Register', () => {
         it('Test to register with new user', (done) => {
             chai.request(server)
                 .post("/register")
-                .send({ usr: 'test', psw: 'test'})
+                .send({ usr: 'test6', psw: 'test6'})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
                     res.body.data.should.be.an("object");
+                    console.log('done reg')
                     done();
                 });
         });
@@ -84,6 +85,7 @@ describe('Login', () => {
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
+                    console.log('done login')
                     done();
                 });
         });
