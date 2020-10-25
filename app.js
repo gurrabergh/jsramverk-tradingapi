@@ -50,11 +50,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    return res.status(201).json({
-        data: {
-            msg: 'success'
-        }
-    });
+    checkLogin(req, res);
 });
 
 app.use((err, req, res, next) => {
