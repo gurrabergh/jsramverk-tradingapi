@@ -1,6 +1,6 @@
 build:
   environment:
-    mongodb: true
+    mongodb: 4
     variables:
       JWT_SECRET: 'WGKvGsFnXBMb5dXGLHqVBcTUJReRQUumgZQYt8Rmp6XZsHMUMRUzKUDrwAPeBdef'
       JWT_TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZSIsImlhdCI6MTYwMTE1MTM5NSwiZXhwIjoxNjMyNjg3Mzk1fQ.D_mEJZXMQ7XKFPR0y6fECy1tM9YkgP1HuLpIFnbhYuE'
