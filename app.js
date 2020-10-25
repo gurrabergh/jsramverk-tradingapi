@@ -159,7 +159,7 @@ async function purchaseStock(res, body) {
 
         var newValue = { $set: {portfolio: body.portfolio, balance: body.balance } };
 
-        dbo.collection("users").updateOne(user, newValue, function(err, result) {
+        dbo.collection("users").updateOne(user, newValue, function(err) {
             if (err) {
                 return res.status(403).json({
                     msg: 'failed'
