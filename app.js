@@ -232,7 +232,7 @@ setInterval(function () {
 const server = app.listen(port);
 const io = require('socket.io')(server);
 
-io.origins(['http://trading.gustavbergh.me:443']);
+io.origins(['http://trading.gustavbergh.me']);
 
 io.on('connection', function (socket) {
     socket.on('chat message', function (message) {
