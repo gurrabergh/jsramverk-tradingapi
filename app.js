@@ -230,7 +230,7 @@ setInterval(function () {
 
 // Start up server
 const server = app.listen(port);
-const io = require('socket.io').listen(server);
+const io = require('socket.io')(server);
 
 io.origins(['https://trading.gustavbergh.me:443']);
 
