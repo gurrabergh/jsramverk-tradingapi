@@ -13,7 +13,7 @@ describe('Register', () => {
         it('Test to register with new user', (done) => {
             chai.request(server)
                 .post("/register")
-                .send({ usr: 'test6', psw: 'test6'})
+                .send({ usr: 'test', psw: 'test'})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");

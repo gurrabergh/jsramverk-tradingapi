@@ -5,6 +5,11 @@ build:
       JWT_SECRET: 'WGKvGsFnXBMb5dXGLHqVBcTUJReRQUumgZQYt8Rmp6XZsHMUMRUzKUDrwAPeBdef'
       JWT_TOKEN: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvZSIsImlhdCI6MTYwMTE1MTM5NSwiZXhwIjoxNjMyNjg3Mzk1fQ.D_mEJZXMQ7XKFPR0y6fECy1tM9YkgP1HuLpIFnbhYuE'
   nodes:
+    analysis:
+      tests:
+        override:
+          # Add the respective Scrutinizer analysis for your language like
+          - js-scrutinizer-run
     my-node:
       services:
         # For available tags, see https://hub.docker.com/_/mongo/
@@ -12,6 +17,7 @@ build:
     coverage:
       tests:
         override:
+          - js-scrutinizer-run
           - command: npm test
             coverage:
               file: coverage/clover.xml
