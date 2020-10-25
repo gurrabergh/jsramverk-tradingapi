@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require('morgan');
 const cors = require('cors');
 var bcrypt = require('bcryptjs');
-const port = 1337;
+const port = 1338;
 
 const mongo = require("mongodb").MongoClient;
 const dsn = "mongodb://localhost:27017/users";
