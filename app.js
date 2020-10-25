@@ -126,7 +126,7 @@ function checkToken(req, res, next) {
 }
 
 async function updateBalance(res, body) {
-    mongo.connect(dsn, function(err, db) {
+    mongo.connect(dsn, {useUnifiedTopology: true}, function(err, db) {
         if (err) {
             throw err;
         }
@@ -150,7 +150,7 @@ async function updateBalance(res, body) {
 }
 
 async function purchaseStock(res, body) {
-    mongo.connect(dsn, function(err, db) {
+    mongo.connect(dsn, {useUnifiedTopology: true}, function(err, db) {
         if (err) {
             throw err;
         }
@@ -174,7 +174,7 @@ async function purchaseStock(res, body) {
 }
 
 async function getAccData(res, body) {
-    const client  = await mongo.connect(dsn);
+    const client  = await mongo.connect(dsn, {useUnifiedTopology: true},);
     const db = await client.db();
     const col = await db.collection('users');
     const result = await col.find({_id: body.usr}, {}).limit(0).toArray();
@@ -187,7 +187,7 @@ async function getAccData(res, body) {
 }
 
 async function getAcc(dsn, collection, criteria, projection, limit) {
-    const client  = await mongo.connect(dsn);
+    const client  = await mongo.connect(dsn, {useUnifiedTopology: true},);
     const db = await client.db();
     const col = await db.collection(collection);
     const res = await col.find(criteria, projection).limit(limit).toArray();
