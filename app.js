@@ -21,53 +21,46 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 
-
 app.post("/register", (req, res) => {
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(req.body.psw, salt, function(err, hash) {
-            mongo.connect(dsn, function(err, db) {
+            mongo.connect(dsn, {useUnifiedTopology: true}, function(err, db) {
                 if (err) {
-                    throw err;
+                    return res.status(403).json({
+                        data: {
+                            msg: 'failed'
+                        }
+                    });
                 }
                 var dbo = db.db("users");
+
+                if (process.env.NODE_ENV === 'test') {
+                    dbo = db.db("test");
+                }
                 var user = { _id: req.body.usr, psw: hash, portfolio: [], balance: 0 };
 
                 dbo.collection("users").insertOne(user, function(err) {
                     if (err) {
-                        throw err;
+                        return res.status(403).json({
+                            data: {
+                                msg: 'failed'
+                            }
+                        });
                     }
                     db.close();
-                    return;
+                    return res.status(201).json({
+                        data: {
+                            msg: 'success'
+                        }
+                    });
                 });
             });
         });
-    });
-    return res.status(201).json({
-        data: {
-            msg: 'success'
-        }
     });
 });
 
 app.post("/login", (req, res) => {
     checkLogin(req, res);
-});
-
-app.use((err, req, res, next) => {
-    if (res.headersSent) {
-        return next(err);
-    }
-
-    res.status(err.status || 500).json({
-        "errors": [
-            {
-                "status": err.status,
-                "title":  err.message,
-                "detail": err.message
-            }
-        ]
-    });
-    return undefined;
 });
 
 async function checkLogin(req, res) {
@@ -94,7 +87,6 @@ async function checkLogin(req, res) {
             });
         });
     } catch (err) {
-        console.log(err);
         return res.status(403).json({
             data: {
                 msg: 'login failed'
@@ -143,12 +135,13 @@ async function updateBalance(res, body) {
 
         var newValue = { $inc: {balance: parseInt(body.balance) } };
 
-        dbo.collection("users").updateOne(user, newValue, function(err, result) {
+        dbo.collection("users").updateOne(user, newValue, function(err) {
             if (err) {
-                throw err;
+                return res.status(403).json({
+                    msg: 'fail'
+                });
             }
             db.close();
-            // console.log(result)
             return res.status(201).json({
                 msg: 'success'
             });
@@ -168,10 +161,11 @@ async function purchaseStock(res, body) {
 
         dbo.collection("users").updateOne(user, newValue, function(err, result) {
             if (err) {
-                throw err;
+                return res.status(403).json({
+                    msg: 'failed'
+                });
             }
             db.close();
-            console.log(result)
             return res.status(201).json({
                 msg: 'success'
             });
@@ -213,7 +207,7 @@ function getStockPrice(input) {
     return start * rate + variance * stock();
 }
 var stocks = [
-    {name: 'Volvo', price: 100, rate: 1.002, variance: 2.6},
+    {name: 'Volvo', price: 100, rate: 1.001, variance: 2.6},
     {name: 'Astra Zeneca', price: 500, rate: 1.001, variance: 3},
     {name: 'Swedbank', price: 140, rate: 1.001, variance: 1.3}
 ];
