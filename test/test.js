@@ -40,21 +40,6 @@ describe('Register', () => {
 
 describe('Login', () => {
     describe('POST /login', () => {
-        it('Test to login with valid user', (done) => {
-            chai.request(server)
-                .post("/login")
-                .send({ usr: 'test', psw: 'test'})
-                .end((err, res) => {
-                    res.should.have.status(201);
-                    res.body.should.be.an("object");
-                    done();
-                });
-        });
-    });
-});
-
-describe('Login', () => {
-    describe('POST /login', () => {
         it('Test to login with invalid user', (done) => {
             chai.request(server)
                 .post("/login")
@@ -89,6 +74,22 @@ describe('post routes', () => {
         });
     });
 });
+
+describe('Login', () => {
+    describe('POST /login', () => {
+        it('Test to login with valid user', (done) => {
+            chai.request(server)
+                .post("/login")
+                .send({ usr: 'test', psw: 'test'})
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.an("object");
+                    done();
+                });
+        });
+    });
+});
+
 
 describe('auth post routs', () => {
     var tests = [
