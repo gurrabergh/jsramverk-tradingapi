@@ -18,7 +18,6 @@ describe('Register', () => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
                     res.body.data.should.be.an("object");
-                    console.log('done reg')
                     done();
                 });
         });
@@ -85,7 +84,6 @@ describe('Login', () => {
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
-                    console.log('done login')
                     done();
                 });
         });

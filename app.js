@@ -64,10 +64,12 @@ app.post("/login", (req, res) => {
 });
 
 async function checkLogin(req, res) {
+    console.log(req.body.usr)
     try {
         let dbRes = await getAcc(dsn, "users", {_id: req.body.usr}, {}, 0);
 
         bcrypt.compare(req.body.psw, dbRes[0].psw, function(err, result) {
+            console.log(result)
             if (result === true) {
                 const jwt = require('jsonwebtoken');
                 const payload = { email: req.body.usr };
@@ -174,10 +176,10 @@ async function purchaseStock(res, body) {
 }
 
 async function getAccData(res, body) {
-    const client  = await mongo.connect(dsn, {useUnifiedTopology: true},);
+    const client  = await mongo.connect(dsn, {useUnifiedTopology: true});
     const db = await client.db();
     const col = await db.collection('users');
-    const result = await col.find({_id: body.usr}, {}).limit(0).toArray();
+    const result = await col.find( { _id: body.usr }, {} ).limit(0).toArray();
 
     await client.close();
 
@@ -191,6 +193,7 @@ async function getAcc(dsn, collection, criteria, projection, limit) {
     const db = await client.db();
     const col = await db.collection(collection);
     const res = await col.find(criteria, projection).limit(limit).toArray();
+    console.log(res)
 
     await client.close();
     return res;
