@@ -15,12 +15,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-if (process.env.NODE_ENV !== 'test') {
-    // use morgan to log at command line
-    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
-}
-
-
 app.post("/register", (req, res) => {
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(req.body.psw, salt, function(err, hash) {
@@ -207,9 +201,9 @@ function getStockPrice(input) {
     return start * rate + variance * stock();
 }
 var stocks = [
-    {name: 'Volvo', price: 100, rate: 1.001, variance: 2.6},
-    {name: 'Astra Zeneca', price: 500, rate: 1.001, variance: 3},
-    {name: 'Swedbank', price: 140, rate: 1.001, variance: 1.3}
+    {name: 'Volvo', price: 100, rate: 1.0001, variance: 2.6},
+    {name: 'Astra Zeneca', price: 500, rate: 1.0001, variance: 3},
+    {name: 'Swedbank', price: 140, rate: 1.0001, variance: 1.3}
 ];
 
 setInterval(function () {
