@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const morgan = require('morgan');
 const cors = require('cors');
 var bcrypt = require('bcryptjs');
 const port = 1338;
@@ -221,11 +220,5 @@ const server = app.listen(port);
 const io = require('socket.io')(server);
 
 io.origins(['https://trading.gustavbergh.me:443']);
-
-io.on('connection', function (socket) {
-    socket.on('chat message', function (message) {
-        io.emit('chat message', message);
-    });
-});
 
 module.exports = server;
