@@ -11,9 +11,11 @@ Jag tycker socket fungerar extremt bra och det var lätt för mig att sätta mig
 
 ### Tester
 
-Verktygen jag använt mig av för testning är Mocha, NYC och chai. Till en början så täcktes alla mina routes av testerna, endast funktionerna för realtid och för att slumpa fram aktiepriserna täcktes inte. Det var dock ett av testerna som testade funktionen för att logga in med ett giltigt konto som inte fungerade i Travis CI så jag skippade det. Jag lyckades ändå uppnå en täckning på ca 80% lokalt och i Travis. Täckningen via Scrutinizer är ca 63% för att några tester inte fungerade där. Jag är väldigt nöjd över hur mitt teknikval fungerade lokalt men det var lite klurigt i byggtjänsterna. Jag uppskattar feedbacken man från av Travis och Scrutinizer, speciellt kodfeedbacken. Det är dock irriterande hur testerna skiljer sig mellan lokalt, Travis och Scrutinizer och man får tyvärr inga felmeddelanden som hjälper. Med lite mer tid så hade jag säkert kunnat få det att fungera. 
+Verktygen jag använt mig av för testning är Mocha, NYC och chai. Till en början så täcktes alla mina routes av testerna, endast funktionerna för realtid och för att slumpa fram aktiepriserna täcktes inte. Det var dock ett av testerna som testade funktionen för att logga in med ett giltigt konto som inte fungerade i Travis CI så jag skippade det. Jag lyckades ändå uppnå en täckning på ca 80% lokalt och i Travis. Täckningen via Scrutinizer är ca 63% för att några tester inte fungerade där. Så det var rätt enkelt att fixa en bra kodtäckning lokalt, mindre enkelt via byggtjänsterna. 
 
-Tjänsten för kodkvalitet gav mig 10/10 så det är jag absolut nöjd med. Betyget för kodtäckning på 63% känns okej men vet att jag har närmare 80% lokalt så det känns ändå bra.
+Jag valde att fortsätta att jobba med Travis och Scrutinizer, detta för att jag kunde återanvända en hel del kod från tidigare kursmoment. Jag är väldigt nöjd över hur mitt teknikval fungerade lokalt men det var lite klurigt i byggtjänsterna. Jag uppskattar feedbacken man från av Travis och Scrutinizer, speciellt kodfeedbacken. Det är dock irriterande hur testerna skiljer sig mellan lokalt, Travis och Scrutinizer och man får tyvärr inga felmeddelanden som hjälper. Med lite mer tid så hade jag säkert kunnat få det att fungera. 
+
+Tjänsten för kodkvalitet analyserade min testfil istället för APIt. Det var synd då jag gärna hade fått den feedbacken, pratade med Emil om detta och det verkde vara något tillfälligt fel hos Scrutinizer. Betyget för kodtäckning på 63% känns okej men vet att jag har närmare 80% lokalt så det känns ändå bra.
 
 ## Project setup
 ```
